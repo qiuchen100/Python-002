@@ -72,7 +72,7 @@ urls = tuple(f'https://movie.douban.com/top250?start={items_per_page * page}' fo
 ```
 
 ### 第五节
-* 数据结构：字符串，元组，列表，映射，集合
+* 数据结构：字符串，元组，列表，字典，集合
 * 流程控制：if--else--； for .. in, 包括break和continu还有else字句
 * 类和实例的关系
 * 函数
@@ -134,3 +134,18 @@ scrapy genspider movies douban.com
   5. 运行爬虫命令：<code>scrapy crawl movies</code>
 
 ### 第十一节
+* 重要逻辑
+  1. 如果还需要对爬取到对信息进一步深层爬取提取内容，那就在process方法中不返回item，而是发给下游对parse方法来解决，如：
+  ```python
+  yield scrapy.Request(link, meta={'item': item}, callback=self.parse2)
+  ```
+  2. 在pipelines中对item做处理，比如保存到文件中。但是需要同时主要两点
+     1. 方法最后必须返回item，否则程序会抛异常。
+     2. 需要在settings中打开pipelines的注册信息，并确保该pipeline注册进去了。
+
+### 第十二节
+* 重要逻辑
+
+## 第十三节
+* yield和return都可以做为函数都返回语句，yield可以根据需要一个一个值单独返回。
+* 推导式一般用于生成一个新的列表，字典，集合。创建方式非常简洁。

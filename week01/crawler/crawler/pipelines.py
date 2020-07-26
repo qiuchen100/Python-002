@@ -10,4 +10,7 @@ from itemadapter import ItemAdapter
 
 class CrawlerPipeline:
     def process_item(self, item, spider):
+        line = f'|{item["title"]}|{item["link"]}|{item["intro"]}|\n\n'
+        with open('./doubanmoive.txt', 'a+', encoding='utf-8') as fp:
+            fp.write(line)
         return item

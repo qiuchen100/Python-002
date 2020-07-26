@@ -1,6 +1,7 @@
 from urllib import parse
 import scrapy
 from bs4 import BeautifulSoup
+from scrapy import Selector
 from crawler.items import CrawlerItem
 
 
@@ -17,9 +18,8 @@ class MoviesSpider(scrapy.Spider):
             yield scrapy.Request(url, callback=self.parse)
 
     def parse(self, response):
-        content_parse_info = BeautifulSoup(response.text, 'html.parser')
-        movies = content_parse_info.find_all('div', attrs={'class': 'hd'})
-        items = []
+        soup = BeautifulSoup(response.text, 'html.parser')
+        movies = soup.find_all('div', attrs={'class': 'hd'})
         for movie in movies:
             item = CrawlerItem()
             movie_info = movie.find('a',)
@@ -27,5 +27,11 @@ class MoviesSpider(scrapy.Spider):
             link = movie_info.get('href')
             item['title'] = title
             item['link'] = link
-            items.append(item)
-        return items
+            yield scrapy.Request(link, meta={'item': item}, callback=self.parse2)
+
+    def parse2(self, response):
+        item = response.meta['item']
+        soup = BeautifulSoup(response.text, 'html.parser')
+        intro = soup.select('div.related-info')[0].get_text().strip()
+        item['intro'] = intro
+        yield item

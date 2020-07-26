@@ -11,3 +11,7 @@ class CrawlerItem(scrapy.Item):
     # name = scrapy.Field()
     title = scrapy.Field()
     link = scrapy.Field()
+    intro = scrapy.Field()
+
+    # def __str__(self):
+    #     return f'|{self.item["title"]}|{self.item["link"]}|{self.item["intro"]}|\n\n'
