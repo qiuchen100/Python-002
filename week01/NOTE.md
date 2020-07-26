@@ -1,3 +1,15 @@
+# 作业详情
+
+### 作业文件夹：
+zhoumo_zuoye
+### 作业一代码及文件：
+zhoumo_zuoye/zuoye.py
+zhoumo_zuoye/movies.csv
+### 作业二代码目录：
+zhoumo_zuoye/zuoye
+zhoumo_zuoye/zuoye/movies.csv
+
+
 # 学习笔记
 
 ### 基础环境准备
@@ -144,7 +156,8 @@ scrapy genspider movies douban.com
      2. 需要在settings中打开pipelines的注册信息，并确保该pipeline注册进去了。
 
 ### 第十二节
-* 重要逻辑
+* Scrapy提供了内置选择器：Xpath，该选择器不仅与Scrapy框架本身已经完好的集成，而且效率
+比beautifulsoup要高，使用也更简单。
 
 ## 第十三节
 * yield和return都可以做为函数都返回语句，yield可以根据需要一个一个值单独返回。
