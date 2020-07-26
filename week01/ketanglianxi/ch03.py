@@ -20,7 +20,7 @@ def parse_content(content):
     print(f'上映时间：{plan_date[0]}')
     rating = selector.xpath('//*[@id="interest_sectl"]/div[1]/div[2]/strong/text()')
     print(f'评分：{rating[0]}')
-    my_list = [film_name, plan_date, rating]
+    my_list = [film_name[0], plan_date[0], rating[0]]
     import pandas as pd
     movie1 = pd.DataFrame(data=my_list)
     movie1.to_csv('./movie1.csv', encoding='utf-8', index=False, header=False)
