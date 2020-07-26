@@ -3,12 +3,14 @@
 import requests
 from bs4 import BeautifulSoup
 
+
 def get_content():
     url = 'https://movie.douban.com/top250?start=0'
     header = {}
     header['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36'
     resp = requests.get(url, headers=header)
     return resp.text
+
 
 def parse_content(content):
     content_parse_info = BeautifulSoup(content, 'html.parser')
@@ -21,6 +23,7 @@ def parse_content(content):
             print(f'链接: {movie_href}')
             print(f'名称: {movie_title}')
 
+
 def main():
     content = get_content()
     parse_content(content)
@@ -28,4 +31,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
