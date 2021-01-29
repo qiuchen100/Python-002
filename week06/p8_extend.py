@@ -4,7 +4,7 @@ class Person(object):
         print('Person walk')
 
 
-class Man(object):
+class Man(Person):
     def walk(self):
         print('Man walk')
 
